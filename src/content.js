@@ -1,4 +1,7 @@
-// import './css/content.css';
+import { createApp } from 'vue';
+import Content from './Content.vue';
+import mark from './mark';
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     console.log(request);
     if (request.value) {
@@ -17,32 +20,22 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
 });
 
-const one = {
-    color: '#fff',
-    background: 'aqua',
-    padding: '5px 10px',
-    'border-left-top-radius': '3px',
-    'border-left-bottom-radius': '3px'
+mark();
+const box = document.createElement('div');
+box.className = 'github-extension-box';
+const style = {
+    position: 'fixed',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    width: '300px',
+    padding: '10px',
+    background: '#fff',
+    'box-shadow': '0 0 5px 5px rgba(0, 0, 0, .3)',
+    'z-index': 99999
 };
-const two = {
-    color: '#fff',
-    background: '#6cf',
-    padding: '5px 10px',
-    'border-right-top-radius': '3px',
-    'border-right-bottom-radius': '3px'
-};
-
-console.log(
-    '%c link %c start ',
-    Object.entries(one)
-        .map(attr => {
-            return attr[0] + ':' + attr[1];
-        })
-        .join(';'),
-    Object.entries(two)
-        .map(attr => {
-            return attr[0] + ':' + attr[1];
-        })
-        .join(';')
-);
-console.log('(￢_￢)');
+Object.keys(style).forEach(sty => {
+    box.style[sty] = style[sty];
+});
+createApp(Content).mount(box);
+document.body.appendChild(box);
