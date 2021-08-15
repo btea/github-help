@@ -1,8 +1,8 @@
 <template>
 	<div class="box">
-		<h1>hello world</h1>
-		<input type="text" v-model="text" />
-		<button @click="startRequest">测试</button>
+		<input type="text" class="add-res" v-model="text" />
+		<button class="add-btn" @click="startRequest">添加</button>
+		<div class="res-list"></div>
 	</div>
 </template>
 <script setup>
@@ -15,3 +15,22 @@ const startRequest = () => {
 	});
 };
 </script>
+<style lang="less" scoped>
+.add-res {
+	height: 35px;
+	border-radius: 5px;
+	border: 1px solid aqua;
+	padding: 0 10px;
+	margin-right: 15px;
+	&:focus {
+		outline: none;
+	}
+}
+.add-btn {
+	padding: 5px 10px;
+	background: #6cf;
+	border-radius: 5px;
+	border: none;
+	color: #fff;
+}
+</style>
