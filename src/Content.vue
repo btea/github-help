@@ -1,16 +1,29 @@
 <template>
 	<div class="box">
 		<input type="text" class="add-res" v-model="text" />
-		<button class="add-btn" @click="startRequest">添加</button>
+		<button class="add-btn" @click="addLink">添加</button>
 		<div class="res-list"></div>
 	</div>
 </template>
 <script setup>
 import api from "./api";
-import { ref } from "vue";
+import { tips } from "./utils/tips";
+import { validateLink } from "./utils/vali";
+import { ref, getCurrentInstance } from "vue";
 let text = ref("");
+const ins = getCurrentInstance();
+const addLink = () => {
+	if (!text.value) {
+		tips("", "请输入要添加的仓库");
+		return;
+	}
+	if (!validateLink(text.value)) {
+		tips("", "请输入正确的仓库地址");
+		return;
+	}
+};
 const startRequest = () => {
-	api.testApi().then((res) => {
+	api.commit().then((res) => {
 		console.log(res);
 	});
 };
