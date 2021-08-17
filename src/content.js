@@ -4,7 +4,6 @@ import mark from "./utils/mark";
 import addDrag from "./utils/drag";
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-	console.log(request);
 	if (request.value) {
 		console.log(request);
 		// console.log(sender);
