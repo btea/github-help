@@ -1,7 +1,13 @@
 <template>
 	<div class="box">
-		<input type="text" class="add-res" v-model="text" />
-		<button class="add-btn" @click="addLink">添加</button>
+		<div class="repositories">
+			<input type="text" class="add-res" v-model="text" />
+			<button class="add-btn" @click="addLink">添加</button>
+		</div>
+		<div class="users">
+			<input type="text" class="add-user" v-model="user" />
+			<button class="add-btn" @click="startRequest">查询</button>
+		</div>
 		<div class="res-list"></div>
 	</div>
 </template>
@@ -11,6 +17,7 @@ import { tips } from "./utils/tips";
 import { validateLink } from "./utils/vali";
 import { ref, getCurrentInstance } from "vue";
 let text = ref("");
+let user = ref("");
 const ins = getCurrentInstance();
 const addLink = () => {
 	if (!text.value) {
@@ -23,13 +30,18 @@ const addLink = () => {
 	}
 };
 const startRequest = () => {
-	api.commit().then((res) => {
+	api.history(user.value).then((res) => {
 		console.log(res);
 	});
 };
 </script>
 <style lang="less" scoped>
-.add-res {
+.repositories,
+.users {
+	margin-bottom: 15px;
+}
+.add-res,
+.add-user {
 	height: 35px;
 	border-radius: 5px;
 	border: 1px solid aqua;
