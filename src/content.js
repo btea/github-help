@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import Content from "./Content.vue";
 import mark from "./utils/mark";
 import addDrag from "./utils/drag";
+import toTop from "./utils/icon";
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	if (request.value) {
@@ -21,6 +22,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 mark();
+toTop();
 const box = document.createElement("div");
 box.className = "github-extension-box";
 const style = {
