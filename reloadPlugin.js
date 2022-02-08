@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const http = require("http");
 
-const name = "ReloadPlugin";
+const pluginName = "ReloadPlugin";
 let response;
 http.createServer((req, res) => {
 	response = res;
@@ -19,7 +19,7 @@ class ReloadPlugin {
 		this.matches = [url];
 	}
 	apply(compiler) {
-		compiler.hooks.afterPlugins.tap(name, (compiler) => {
+		compiler.hooks.afterPlugins.tap(pluginName, (compiler) => {
 			let _path = path.resolve(__dirname, "./public/manifest.json");
 			fs.readFile(_path, (err, chunk) => {
 				if (err) {
@@ -39,7 +39,7 @@ class ReloadPlugin {
 			});
 		});
 
-		compiler.hooks.done.tap(name, (stats) => {
+		compiler.hooks.done.tap(pluginName, (stats) => {
 			console.log("\r\n   开始更新插件   \r\n");
 			try {
 				//     // postMsg();
